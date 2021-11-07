@@ -45,17 +45,10 @@
     let toggleAncho = ref(true);
     const store = useStore();
     const lista = reactive(store.state.listaSideBar);
-    // const lista = reactive([
-    //     { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/' },
-    //     { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/view2' },
-    //     { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/view3' },
-    //     { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/view4' },
-    //     { nom: 'Reportes', id:4, ico: 'list_alt', to:'/view5' },
-    // ]);
-
     const setColor = (index) => {
-        var el = document.getElementsByClassName('listItem')[index];
-        var listItems = document.getElementsByClassName('listItem');
+        const el = document.getElementsByClassName('listItem')[index];
+        const el2 = document.getElementById('lista2').getElementsByClassName('listItem')[index];
+        const listItems = document.getElementsByClassName('listItem');
 
         for (let l_item of listItems) {
             l_item.style.borderTopRightRadius = '0px';
@@ -63,11 +56,11 @@
             l_item.querySelector('div>div').style.background = "#00897b";
             l_item.style.background = "#00897b";
             l_item.querySelector('a').style.color = "#FFF";
+            el2.querySelector('a').style.color = "#212121";
         }
         
         document.getElementsByClassName('listItem')[index - 1].style.borderBottomRightRadius = '22px';
         document.getElementsByClassName('listItem')[index + 1].style.borderTopRightRadius = '22px';
-
         el.querySelector('div>div').style.background = "#FFF";
         el.style.background = "transparent";
         el.querySelector('a').style.color = "#212121";
