@@ -8,3 +8,13 @@ div#principal::-webkit-scrollbar-thumb {
     border-radius: 4px;
     outline: 0;
 }
+.no-clikcable {
+    pointer-events: none;
+    -moz-pointer-events: none;
+    -khtml-pointer-events: none;
+    -webkit-pointer-events: none;
+    -o-pointer-events: none;
+}
+#header{
+    margin-top: 10px;
+}

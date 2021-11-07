@@ -27,7 +27,8 @@
 </template>
 
 <script setup>
-    import { useStore } from 'vuex'
+    import { useStore } from 'vuex';
+    
     useStore().commit('setBarText', 'Listado de ventas');
 </script>
 

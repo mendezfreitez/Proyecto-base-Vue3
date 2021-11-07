@@ -1,12 +1,12 @@
 <template>
-    <button @click="mostrarOcultar" id="btnMenu">
-        <i class="material-icons" style="color:#FFF;">{{ iconoBtnMenu }}</i>
+    <button class="horizontalSidebar" @click="mostrarOcultar" id="btnMenuHorizaontal" >
+        <i class="material-icons" style="color:#FFF;">{{ store.state.iconoBtnMenu }}</i>
     </button>
-    
-    <aside :style="{'left':'-' + anchobar + 'px' }" id="sidebar">
+    <aside :style="{'left':'-' + store.state.anchoBar + 'px' }" id="sidebar" class="horizontalSidebar">
         <ul id="sidelist">
             <li class="listItem" style="background:#00897b!important; border-top-right-radius:20px; height:60px!important;">
                 <div>
+                    
                     <div style="height:45px!important; border-bottom-right-radius:20px; display: flex; aling-items: center!important; justify-content: center!important;">
                         <p id="titleMenu" style="margin-top:0px!important; padding-top:19px!important; display:inline-block; height:20px; font-size:18px;">MENÚ</p>
                     </div>
@@ -24,7 +24,7 @@
                 </router-link>
             </li>
 
-            <li class="listItem" style="background:#00897b!important;">
+            <li class="listItem no-clikcable" style="background:#00897b!important;">
                 <div>
                     <div>
                     </div>
@@ -37,23 +37,21 @@
     </aside> 
 </template>
 
-<script>
-import { onMounted, reactive, ref } from 'vue';
-export default {
-    name:'sidebar',
-    setup(){
-        onMounted(() => {
-            cambioColor(1)
-        })
-        const anchobar = ref(0);
+<script setup>
+import { onBeforeMount, onMounted, reactive, ref } from 'vue';
+import { useStore } from 'vuex';
+        onMounted(() => { cambioColor(1) })
+        const store = useStore();
+        let anchobar = ref(store.state.anchoBar);
         const iconoBtnMenu = ref('arrow_back');
-        const lista = reactive([
-            { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/' },
-            { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/view2' },
-            { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/view3' },
-            { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/view4' },
-            { nom: 'Reportes', id:4, ico: 'list_alt', to:'/view5' },
-        ]);
+        const lista = reactive(store.state.listaSideBar);
+        // const lista = reactive([
+        //     { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/' },
+        //     { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/view2' },
+        //     { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/view3' },
+        //     { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/view4' },
+        //     { nom: 'Reportes', id:4, ico: 'list_alt', to:'/view5' },
+        // ]);
 
         const cambioColor = (index) => {
             var el = document.getElementsByClassName('listItem')[index];
@@ -74,22 +72,22 @@ export default {
             el.style.background = "transparent";
             el.querySelector('a').style.color = "#212121"
         }
-        
+
         const mostrarOcultar = () => {
-            if(anchobar.value === 220){
+            if(store.state.anchoBar === 220){
                 anchobar.value = 0;
+                store.commit("setAnchoBar", 0);
+                store.commit("setAltoBar", 0);
                 iconoBtnMenu.value = 'arrow_back'
                 document.getElementById('derecha').style.width = '220px';
             }else{
-                anchobar.value = 220 
+                anchobar.value = 220
+                store.commit("setAnchoBar", 220);
+                store.commit("setAltoBar", 300);
                 iconoBtnMenu.value = 'arrow_forward'
                 document.getElementById('derecha').style.width = '0px';
             }
         }
-
-        return { lista, iconoBtnMenu, anchobar, cambioColor, mostrarOcultar }
-    }
-}
 </script>
 
 <style>
@@ -114,7 +112,7 @@ export default {
     background:#00897b;
     border-top-right-radius: 20px;
 }
-#sidelist{
+#sidelist, #lista2 {
     margin: 0px;
     color:rgb(240, 255, 255);
     text-align: left;
@@ -122,7 +120,7 @@ export default {
     padding: 0px;
     background: transparent;
 }
-#sidelist > li {
+#sidelist > li, #lista2 > li {
     z-index:3!important;
     user-select: none;
     cursor: pointer;
@@ -135,10 +133,10 @@ export default {
 #sidebar{
     width: 220px;
     height: 100%;
-    position:absolute;
+    position: absolute;
     top:0; 
     left:0;
-    transition:0.5s;
+    transition: .5s;
     display: flex;
     flex-direction: column;
 }
@@ -149,9 +147,9 @@ export default {
     padding-top:15px;
     height:50px;
 }
-#btnMenu{
+#btnMenuHorizaontal{
     height:45px;
-    width:45px;
+    width:40px;
     padding-left: 3px!important;
     border-top-right-radius:25px;
     border-bottom-right-radius:25px;
@@ -164,5 +162,9 @@ export default {
 }
 a { 
     color: #FFF;
+}
+#lista2, #sideBarList2, #sideBarComplete{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 </style>

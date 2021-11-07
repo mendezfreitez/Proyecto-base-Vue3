@@ -26,13 +26,10 @@
     </div> -->
 </template>
 
-<script>
-import { useStore } from 'vuex'
-export default {
-    setup(){
-        useStore().commit('setBarText', 'Sobre Nosotros');
-    }
-}
+<script setup>
+import { useStore } from 'vuex';
+
+useStore().commit('setBarText', 'Reportes');
 </script>
 
 <style>
