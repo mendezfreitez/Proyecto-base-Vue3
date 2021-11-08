@@ -15,7 +15,7 @@
                     <a style="width:0px; height:0px; margin:0px;"></a>
                 </li>
 
-                <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="setColor(index + 1)" class="listItem">
+                <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="methods.setColor(index + 1)" class="listItem">
                     <router-link :to="i.to" style="text-decoration: none; color: none;">
                     <div style="height:45px!important; width:25px!important; background:#00897b; float:left;">
                         <div class="colaItem" style="height:45px!important; width:20px!important; background:#00897b; float:right; border-top-left-radius:20px; border-bottom-left-radius: 20px;"></div>
@@ -45,10 +45,6 @@
     let toggleAncho = ref(true);
     const store = useStore();
     const lista = reactive(store.state.listaSideBar);
-
-    const setColor = (index) => {
-        methods.setColor(index);
-    }
 
     const mostrarOcultar2 = () => {
         if(store.state.altoBar === 0){

@@ -13,7 +13,7 @@
                 <a style="width:0px; height:0px; margin:0px;"></a>
             </li>
 
-            <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="setColor(index + 1)" class="listItem">
+            <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="methods.setColor(index + 1)" class="listItem">
                 <router-link :to="i.to" style="text-decoration: none; color: none;">
                 <div style="height:45px!important; width:25px!important; background:#00897b; float:left;">
                     <div class="colaItem" style="height:45px!important; width:20px!important; background:#00897b; float:right; border-top-left-radius:20px; border-bottom-left-radius: 20px;"></div>
@@ -37,32 +37,27 @@
 </template>
 
 <script setup>
-    import { onBeforeMount, onMounted, reactive, ref } from 'vue';
+    import { onMounted, reactive, ref } from 'vue';
     import { useStore } from 'vuex';
     import methods from '../assets/js/methods';
 
-    onMounted(() => { setColor(1) })
     const store = useStore();
     let anchobar = ref(store.state.anchoBar);
     const lista = reactive(store.state.listaSideBar);
 
-    const setColor = (index) => {
-        methods.setColor(index);
-    }
-
     const mostrarOcultar = () => {
         if(store.state.anchoBar === 220){
-            anchobar.value = 0;
             store.commit("setAnchoBar", 0);
             store.commit("setAltoBar", 0);
             document.getElementById('derecha').style.width = '220px';
         }else{
-            anchobar.value = 220
             store.commit("setAnchoBar", 220);
             store.commit("setAltoBar", 300);
             document.getElementById('derecha').style.width = '0px';
         }
     }
+    
+    onMounted(() => { methods.setColor(1) })
 </script>
 
 <style>
