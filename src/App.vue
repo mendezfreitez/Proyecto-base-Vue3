@@ -1,6 +1,5 @@
 <template>
   <div style="display: flex; flex-direction: row; height:100%!important;">
-    <!-- <ButtonSideBar /> -->
     <div v-if="store.state.visibleBar" id="derecha">
       <SideBar />
     </div>
@@ -16,12 +15,11 @@
 </template>
 
 <script setup>
-  import SideBar from './components/sidebar.vue'
-  import SideBarComplete from './components/sideBar2'
-  import TopBar from './components/topBar.vue'
-  // import ButtonSideBar from './components/buttonSideBar.vue'
-  import FooterBar from './components/footer.vue'
-  import {useStore} from 'vuex'
+  import SideBar from './components/sidebar.vue';
+  import SideBarComplete from './components/sideBar2';
+  import TopBar from './components/topBar.vue';
+  import FooterBar from './components/footer.vue';
+  import {useStore} from 'vuex';
   const store = useStore();
 </script>
 
@@ -41,7 +39,7 @@
   transition: 0.5s;
 }
 #principal{
-  padding: 0px 40px 0px 50px;
+  padding: 0px 41px 0px 50px;
   background: transparent;
   height: 100%;
   flex: 1;
@@ -56,10 +54,7 @@ html, #app, body{
   background:transparent;
 }
 
-@media (max-width:900px) {
-  /* #principal{
-    padding: 0px 20px 0px 30px;
-  } */
+@media (max-width:800px) {
   #derecha, #btnMenu{
     display: none;
   }
@@ -74,7 +69,7 @@ html, #app, body{
     left: 0px;
     right: 0px;
     top:0px;
-    padding: 0px 20px 10px 20px;
+    padding: 0px 49px 10px 50px;
     height: auto;
   }
   #sidelist2{

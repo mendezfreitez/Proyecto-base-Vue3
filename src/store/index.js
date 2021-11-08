@@ -9,10 +9,10 @@ export default createStore({
     iconoBtnMenu:'arrow_back',
     listaSideBar: [
       { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/' },
-      { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/view2' },
-      { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/view3' },
-      { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/view4' },
-      { nom: 'Reportes', id:4, ico: 'list_alt', to:'/view5' },
+      { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/ventas' },
+      { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/clientes' },
+      { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/repartidores' },
+      { nom: 'Reportes', id:4, ico: 'list_alt', to:'/reportes' },
     ]
   },
   mutations: {

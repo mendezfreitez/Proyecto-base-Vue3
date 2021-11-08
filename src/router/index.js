@@ -1,36 +1,33 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import View1 from '../views/view1.vue'
-import View2 from '../views/view2.vue'
-import View3 from '../views/view3.vue'
-import View4 from '../views/view4.vue'
+import Productos from '../views/view1.vue'
+import Ventas from '../views/view2.vue'
+import Clientes from '../views/view3.vue'
+import Repartidores from '../views/view4.vue'
 
 const routes = [
   {
     path: '/',
     name: '',
-    component: View1
+    component: Productos
   },
   {
-    path: '/view2',
+    path: '/ventas',
     name: 'view2',
-    component: View2
+    component: Ventas
   },
   {
-    path: '/view3',
+    path: '/clientes',
     name: 'view3',
-    component: View3
+    component: Clientes
   },
   {
-    path: '/view4',
+    path: '/repartidores',
     name: 'view4',
-    component: View4
+    component: Repartidores
   },
   {
-    path: '/view5',
+    path: '/reportes',
     name: 'view5',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import('../views/view5.vue')
   }
 ]

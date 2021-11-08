@@ -6,7 +6,6 @@
         <ul id="sidelist">
             <li class="listItem" style="background:#00897b!important; border-top-right-radius:20px; height:60px!important;">
                 <div>
-                    
                     <div style="height:45px!important; border-bottom-right-radius:20px; display: flex; aling-items: center!important; justify-content: center!important;">
                         <p id="titleMenu" style="margin-top:0px!important; padding-top:19px!important; display:inline-block; height:20px; font-size:18px;">MENÚ</p>
                     </div>
@@ -14,7 +13,7 @@
                 <a style="width:0px; height:0px; margin:0px;"></a>
             </li>
 
-            <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="cambioColor(index + 1)" class="listItem">
+            <li :to="i.to" v-for="(i,index) in lista" :key="i.id" @click="setColor(index + 1)" class="listItem">
                 <router-link :to="i.to" style="text-decoration: none; color: none;">
                 <div style="height:45px!important; width:25px!important; background:#00897b; float:left;">
                     <div class="colaItem" style="height:45px!important; width:20px!important; background:#00897b; float:right; border-top-left-radius:20px; border-bottom-left-radius: 20px;"></div>
@@ -38,51 +37,32 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, reactive, ref } from 'vue';
-import { useStore } from 'vuex';
-        onMounted(() => { cambioColor(1) })
-        const store = useStore();
-        let anchobar = ref(store.state.anchoBar);
-        const iconoBtnMenu = ref('arrow_back');
-        const lista = reactive(store.state.listaSideBar);
+    import { onBeforeMount, onMounted, reactive, ref } from 'vue';
+    import { useStore } from 'vuex';
+    import methods from '../assets/js/methods';
 
-        const cambioColor = (index) => {
-            const el = document.getElementsByClassName('listItem')[index];
-            const el2 = document.getElementById('lista2').getElementsByClassName('listItem')[index];
-            const listItems = document.getElementsByClassName('listItem');
+    onMounted(() => { setColor(1) })
+    const store = useStore();
+    let anchobar = ref(store.state.anchoBar);
+    const lista = reactive(store.state.listaSideBar);
 
-            for (let l_item of listItems) {
-                l_item.style.borderTopRightRadius = '0px';
-                l_item.style.borderBottomRightRadius = '0px';
-                l_item.querySelector('div>div').style.background = "#00897b";
-                l_item.style.background = "#00897b";
-                l_item.querySelector('a').style.color = "#FFF";
-                el2.querySelector('a').style.color = "#212121";
-            }
-            
-            document.getElementsByClassName('listItem')[index - 1].style.borderBottomRightRadius = '22px';
-            document.getElementsByClassName('listItem')[index + 1].style.borderTopRightRadius = '22px';
+    const setColor = (index) => {
+        methods.setColor(index);
+    }
 
-            el.querySelector('div>div').style.background = "#FFF";
-            el.style.background = "transparent";
-            el.querySelector('a').style.color = "#212121"
+    const mostrarOcultar = () => {
+        if(store.state.anchoBar === 220){
+            anchobar.value = 0;
+            store.commit("setAnchoBar", 0);
+            store.commit("setAltoBar", 0);
+            document.getElementById('derecha').style.width = '220px';
+        }else{
+            anchobar.value = 220
+            store.commit("setAnchoBar", 220);
+            store.commit("setAltoBar", 300);
+            document.getElementById('derecha').style.width = '0px';
         }
-
-        const mostrarOcultar = () => {
-            if(store.state.anchoBar === 220){
-                anchobar.value = 0;
-                store.commit("setAnchoBar", 0);
-                store.commit("setAltoBar", 0);
-                iconoBtnMenu.value = 'arrow_back'
-                document.getElementById('derecha').style.width = '220px';
-            }else{
-                anchobar.value = 220
-                store.commit("setAnchoBar", 220);
-                store.commit("setAltoBar", 300);
-                iconoBtnMenu.value = 'arrow_forward'
-                document.getElementById('derecha').style.width = '0px';
-            }
-        }
+    }
 </script>
 
 <style>
@@ -131,7 +111,7 @@ import { useStore } from 'vuex';
     position: absolute;
     top:0; 
     left:0;
-    transition: .5s;
+    transition: .4s;
     display: flex;
     flex-direction: column;
 }
