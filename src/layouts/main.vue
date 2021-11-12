@@ -1,6 +1,5 @@
 <template>
-  <router-view />
-  <!-- <div style="display: flex; flex-direction: row; height:100%!important;">
+  <div style="display: flex; flex-direction: row; height:100%!important;">
     <div v-if="store.state.visibleBar" id="derecha">
       <SideBar />
     </div>
@@ -12,14 +11,13 @@
       <router-view />
       <FooterBar />
     </div>
-  </div> -->
+  </div>
 </template>
-
 <script setup>
-  import SideBar from './components/sidebar.vue';
-  import SideBarComplete from './components/sideBar2';
-  import TopBar from './components/topBar.vue';
-  import FooterBar from './components/footer.vue';
+  import SideBar from '../components/sidebar.vue';
+  import SideBarComplete from '../components/sideBar2';
+  import TopBar from '../components/topBar.vue';
+  import FooterBar from '../components/footer.vue';
   import {useStore} from 'vuex';
   const store = useStore();
 </script>

@@ -8,7 +8,7 @@ export default createStore({
     visibleBar: true,
     iconoBtnMenu:'arrow_back',
     listaSideBar: [
-      { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/' },
+      { nom: 'Mis Productos', id:0, ico: 'assignment', to:'/productos' },
       { nom: 'Listado de Ventas', id:1, ico: 'list', to:'/ventas' },
       { nom: 'Mis Clientes', id:2, ico: 'supervised_user_circle', to:'/clientes' },
       { nom: 'Repartidores', id:3, ico: 'local_shipping', to:'/repartidores' },

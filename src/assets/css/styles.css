@@ -18,3 +18,9 @@ div#principal::-webkit-scrollbar-thumb {
 #header{
     margin-top: 10px;
 }
+html, #app, body {
+    margin: 0%;
+    height: 100%!important;
+    width: 100%!important;
+    background: #bbfff375!important;
+}
