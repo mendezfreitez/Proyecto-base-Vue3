@@ -3,49 +3,57 @@
     <h2>Login</h2>
     <form>
       <div class="user-box">
-        <input type="text" name="" required="" v-model="user">
+        <input type="text" name="" required="" v-model="usuario">
         <label>Usuario</label>
       </div>
       <div class="user-box">
-        <input type="password" name="" required="" v-model="password">
+        <input type="password" name="" required="" v-model="contrasenia" @keyup.enter="login">
         <label>Contraseña</label>
       </div>
-      <a href="#" @click.prevent="login">
+      <!-- <a href="#"c>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        Submit
-      </a>
+        ENVIAR
+      </a> -->
+      <button class="btnCerrarSession" @click.prevent="login">ENVIAR</button>
     </form>
   </div>
 </template>
 
 <script setup>
-import {ref, watch, watchEffect} from 'vue'
+import {ref, watch} from 'vue'
+import axios from 'axios'
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
+const router = useRouter();
 
-const user = ref('');
-const password = ref('');
+const usuario = ref('mrtuna');
+const contrasenia = ref('mrtuna');
+const store = useStore();
 
-watch(user, (nv, ov) => {
-  const ltr = nv.codePointAt(nv.length - 1)
-
-  if((ltr < 65 || ltr > 90) && (ltr < 97 || ltr > 122)) {
-    user.value = ov
-  }
+watch(usuario, (nv, ov) => {
+  const ltr = nv.codePointAt(nv.length - 1);
+  if((ltr < 65 || ltr > 90) && (ltr < 97 || ltr > 122) && (ltr < 48 || ltr > 57)) { usuario.value = ov }
 });
-
-watch(password, (nv, ov) => {
-  const ltr = nv.codePointAt(nv.length - 1)
-
-  if((ltr < 65 || ltr > 90) && (ltr < 97 || ltr > 122)) {
-    user.value = ov
-  }
+watch(contrasenia, (nv, ov) => {
+  const ltr = nv.codePointAt(nv.length - 1);
+  // console.log(nv);
 });
 
 const login = () => {
-  console.log(user.value, password.value)
+  axios.post(`${store.state.url}login`, {usuario: usuario.value, contrasenia: contrasenia.value} ).then(function(resp){
+    if(resp.data.token) {
+      localStorage.setItem('token', resp.data.token);
+      router.push('/ventas')
+    }
+    else {
+      alert(resp.data.mensaje); //esto se debe suplantar por algo mejor
+    }
+  })
 }
+
 
 </script>
 

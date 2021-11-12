@@ -15,10 +15,10 @@ const methods = {
      
      document.getElementsByClassName('listItem')[index - 1].style.borderBottomRightRadius = '22px';
      document.getElementsByClassName('listItem')[index + 1].style.borderTopRightRadius = '22px';
-     el.querySelector('div>div').style.background = "#FFF";
+     el.querySelector('div>div').style.background = "#bbfff3";
      el.style.background = "transparent";
      el.querySelector('a').style.color = "#212121";
-   }
+   },
 }
 
 export default methods;

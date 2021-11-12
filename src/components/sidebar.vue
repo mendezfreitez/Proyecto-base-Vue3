@@ -31,7 +31,9 @@
                 <a style="width:0px; height:0px; margin:0px;"></a>
             </li>
         </ul>
-        <div style="height:100%; width:100%; background:#00897b;">
+        
+        <div class="asideBlock">
+            <button class="btnCerrarSession" @click="logOut">Cerrar sessión</button>
         </div>
     </aside> 
 </template>
@@ -40,8 +42,11 @@
     import { onMounted, reactive, ref } from 'vue';
     import { useStore } from 'vuex';
     import methods from '../assets/js/methods';
+    import {useRouter} from 'vue-router'
 
+    const router = useRouter();
     const store = useStore();
+
     let anchobar = ref(store.state.anchoBar);
     const lista = reactive(store.state.listaSideBar);
 
@@ -57,10 +62,24 @@
         }
     }
     
+   const logOut = () => {
+      localStorage.removeItem('token');
+      router.push('/login');
+   } 
+    
     onMounted(() => { methods.setColor(1) })
 </script>
 
 <style>
+.asideBlock {
+    height:100%;
+    width:100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: 10px;
+    background:#00897b;
+}
 .material-icons {
     background: transparent!important;
 }
@@ -136,5 +155,24 @@ a {
 #lista2, #sideBarList2, #sideBarComplete{
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+.btnCerrarSession {
+    width: 120px;
+    height: 36px;
+    border: 0px;
+    border-radius: 7px;
+    background: #263238;
+    cursor: pointer;
+    color: #FFF;
+    
+}
+.btnCerrarSession:hover {
+    background: #03e9f4;
+    color: #FFF;
+    /* border-radius: 7px; */
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
 }
 </style>

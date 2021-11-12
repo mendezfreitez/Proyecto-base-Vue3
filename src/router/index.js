@@ -44,26 +44,6 @@ const routes = [
     name: '',
     component: Login
   },
-  // {
-  //   path: '/ventas',
-  //   name: 'view2',
-  //   component: Ventas
-  // },
-  // {
-  //   path: '/clientes',
-  //   name: 'view3',
-  //   component: Clientes
-  // },
-  // {
-  //   path: '/repartidores',
-  //   name: 'view4',
-  //   component: Repartidores
-  // },
-  // {
-  //   path: '/reportes',
-  //   name: 'view5',
-  //   component: () => import('../views/view5.vue')
-  // }
 ]
 
 const router = createRouter({
@@ -72,9 +52,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  
   if(to.path !== '/login' && !localStorage.getItem('token')) {
     next({path:'/login'});
     alert("No estas logueado!");
+  }
+  else if(to.path === '/login' && localStorage.getItem('token')) {
+    next({path: from.path});
   }
   else next();
 })

@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
  
 export default createStore({
   state: {
+    // url: 'https://mrtuna.herokuapp.com/',
+    url: 'http://localhost:3000/',
     barText : '',
     anchoBar: 0,
     altoBar: 0,
